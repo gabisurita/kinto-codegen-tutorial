@@ -8,7 +8,7 @@ Creating clients for Kinto using Swagger Codegen
 :slug: kinto-client-generation
 
 While working with
-`Adding Support to OpenAPI to Kinto <https://github.com/Kinto/kinto/pull/977>`,
+`Adding Support to OpenAPI to Kinto <https://github.com/Kinto/kinto/pull/977>`_,
 one of the features that most called my attention was the support
 for automated client generation. This may save a lot of time and effort
 for developers which may want to code on client languages that are currently not
@@ -103,7 +103,7 @@ We may start coding our app logic by creating an ``app.py`` file.
     # create a client instance
     client = swagger_client.KintoApi()
 
-    # Our bucket data (we can define it as a dict)
+    # Our bucket data (one way is to define it as a dict)
     buck = {
         'data': {
             'id': 'openapi',
@@ -117,7 +117,7 @@ We may start coding our app logic by creating an ``app.py`` file.
     # Create our bucket
     client.create_bucket(bucket=buck)
 
-    # Our collection data (we can also define it as an object instance)
+    # Our collection data (we can define it as a Collection instance)
     col = swagger_client.Collection()
     col.data = {'description': 'What we know about our clients'}
     col.permissions = {'write': ['system.Everyone']}
@@ -157,22 +157,23 @@ We may start coding our app logic by creating an ``app.py`` file.
 Now we can run our app. This looks nice, doesn't it? But wait a minute!
 Why would we need a generated Python client if we already have our fancy
 `kinto-http.py <https://github.com/Kinto/kinto-http.py>`_ client?
-We actually may never use it, but this client helped me understanding
-how the client generator works with "not so friendly" clients in other languages,
-which we will see at out next example, a PHP client.
+We actually may never use it, but this helped me on managing the client generator
+*less friendly* languages, as we will see at out next example, a PHP client.
 
-Genrating a PHP client
-----------------------
+Generating a PHP client
+-----------------------
 
-I will go fast with the generations steps this time.
+I will go fast with the generation steps this time.
 Don't forget to replace the download command with your own link.
 
 .. code-block:: bash
 
     echo '{"swaggerUrl":"https://raw.githubusercontent.com/gabisurita/kinto/631-swagger/swagger.yaml"}' \
     | http post https://generator.swagger.io/api/gen/clients/php --verify=no
+
     http get https://generator.swagger.io/api/gen/download/9351bd60-8f62-42c6-b865-388d6938d2a6 \
     --download --verify=no
+
     unzip php-generated-client.zip
 
 PHP doesn't support keyword arguments by default, so we need to
@@ -241,5 +242,6 @@ Isn't this amazing (despite the fact that we just coded PHP)?
 You may run the and check it's outputs.
 
 This tutorial may be extended once the OpenAPI specification is merged
-to the Kinto repository. If you want to try an specif language, you may
+to the Kinto repository. If you want to try an specific language
+(like Haskell, I really want to try Haskell), you may
 also suggest it for me and we can try this adventure together! See you!
